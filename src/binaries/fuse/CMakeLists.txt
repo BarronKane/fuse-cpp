@@ -20,7 +20,7 @@ add_executable(${PROJECT_NAME}
 add_source_group(${FUSE_COLLECTIVE})
 
 target_link_libraries(${PROJECT_NAME}
-    ${FUSE_API}
-
+    ${FUSE_UTILITIES}
+    ${FUSE_LOGGER}
     
 )
