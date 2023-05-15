@@ -2,6 +2,7 @@ project(Fuse-Utilities)
 set(FUSE_UTILITIES ${PROJECT_NAME} CACHE INTERNAL "FUSE_UTILITIES")
 
 set(FUSEU_PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/private/utilites.cpp
 )
 set(FUSEU_PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/public/types.h
@@ -15,6 +16,8 @@ set(FUSEU_COLLECTIVE
 add_library(${PROJECT_NAME}
     ${FUSEU_COLLECTIVE}
 )
+
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 add_source_group(${FUSEU_COLLECTIVE})
 

@@ -2,7 +2,4 @@
 
 #pragma once
 
-namespace logging 
-{
-	
-}
+

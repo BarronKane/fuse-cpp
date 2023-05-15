@@ -43,5 +43,5 @@ install(EXPORT ${PROJECT_NAME}LibraryConfig DESTINATION share/${PROJECT_NAME}Lib
 export(TARGETS ${FUSE_LOGGER} FILE ${PROJECT_NAME}LibraryConfig.cmake)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-        
+    ${FUSE_UTILITES}
 )
