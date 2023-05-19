@@ -18,7 +18,6 @@ pushd build
 conan install .. --build=missing -s build_type=Debug
 cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=.\generators\conan_toolchain.cmake
 cmake --build .
-deactivate
 popd
 
 goto :EOF 

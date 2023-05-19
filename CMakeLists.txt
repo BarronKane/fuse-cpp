@@ -39,10 +39,10 @@ define_property(
 
 find_package(CURL REQUIRED)
 
-add_subdirectory_with_folder("Fuse" src/binaries/fuse)
-
 add_subdirectory_with_folder("utilities" src/utilities/utilities)
 add_subdirectory_with_folder("utilities" src/utilities/logger)
+
+add_subdirectory_with_folder("Fuse" src/binaries/fuse)
 
 
 #enable_testing()

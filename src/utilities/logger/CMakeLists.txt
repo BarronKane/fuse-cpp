@@ -2,10 +2,10 @@ project(Fuse-Logger)
 set(FUSE_LOGGER ${PROJECT_NAME} CACHE INTERNAL "FUSE_LOGGER")
 
 set(FUSEL_PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/private/logger.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/private/logger/logger.cpp
 )
 set(FUSEL_PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/public/logger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/public/logger/logger.h
 )
 
 set(FUSEL_COLLECTIVE
@@ -24,9 +24,9 @@ generate_export_header(${FUSE_LOGGER})
 # Defines the headers for this library,
 # and will be added to build paths.
 target_include_directories(${FUSE_LOGGER} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/public>
-    $<INSTALL_INTERFACE:public>
-    PRIVATE src)
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/private)
 
 # "make install" to the correct locations (GNUInstallDirs).
 install(TARGETS ${FUSE_LOGGER} EXPORT ${PROJECT_NAME}LibraryConfig
@@ -43,5 +43,5 @@ install(EXPORT ${PROJECT_NAME}LibraryConfig DESTINATION share/${PROJECT_NAME}Lib
 export(TARGETS ${FUSE_LOGGER} FILE ${PROJECT_NAME}LibraryConfig.cmake)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-    ${FUSE_UTILITES}
+    ${FUSE_UTILITIES}
 )
