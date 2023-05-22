@@ -9,7 +9,7 @@
 #include <chrono>
 #include <thread>
 
-#include "utilities/platform.h"
+#include "utilities/utilities.h"
 
 class Logger;
 

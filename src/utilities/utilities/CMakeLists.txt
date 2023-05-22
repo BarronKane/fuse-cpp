@@ -5,6 +5,7 @@ set(FUSEU_PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/private/utilities/utilites.cpp
 )
 set(FUSEU_PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/public/utilities/utilities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/public/utilities/platform.h
 )
 
