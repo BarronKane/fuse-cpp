@@ -51,7 +51,6 @@ public:
 
 	void Log(LogLevel level, std::string message);
 
-
 protected:
 
 	Logger();
@@ -61,14 +60,22 @@ protected:
 
 private:
 
-	std::mutex m_queue;
+	void push(std::string message, std::queue<std::string> queue, std::mutex &mut);
+
+	void print(Logger* logger);
+
+	std::mutex m_queue_cout;
+	std::mutex m_queue_file;
+
 	std::mutex m_fileout;
 	std::mutex m_stdout;
 	std::mutex m_stderr;
 
-	std::queue<std::string> queue;
+	std::queue<std::string> cout_queue;
+	std::queue<std::string> file_queue;
 
 	std::thread print_thread;
+	std::thread file_thread;
 };
 
 void Log(LogLevel level, const char* const message, ...)
