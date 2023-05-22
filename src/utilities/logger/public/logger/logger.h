@@ -1,6 +1,8 @@
 #pragma once
 
 #include <sstream>
+#include <stdarg.h>
+#include <format>
 #include <mutex>
 #include <queue>
 #include <chrono>
@@ -8,18 +10,80 @@
 
 #include "utilities/platform.h"
 
-namespace logging 
+class Logger;
+
+enum class LogLevel : uint8
 {
-	class Logger
+	verbose,
+	info,
+	warning,
+	error,
+	fatal
+};
+
+const char* LevelToString(LogLevel level) noexcept
+{
+	switch (level)
 	{
-	public:
+		case LogLevel::verbose: return "VERBOSE";
+		case LogLevel::info: return "INFO";
+		case LogLevel::warning: return "WARNING";
+		case LogLevel::error: return "ERROR";
+		case LogLevel::fatal: return "FATAL";
+		default: return "";
+	}
+}	
 
-		static Logger * const logger;
+class Logger
+{
+public:
 
-	private:
+	// Not cloneable.
+	Logger(Logger &other) = delete;
+	// Not assignable.
+	void operator=(const Logger &) = delete;
 
-		Logger(void) {}
-		Logger(Logger& other) {}
-		Logger& operator=(Logger& other) {}
-	};
+	// Static method to control access.
+	static Logger* GetInstance();
+
+	// Public Interface
+
+	void Log(LogLevel level, std::string message);
+
+
+protected:
+
+	Logger();
+	~Logger();
+
+	static Logger* logger_;
+
+private:
+
+	std::mutex m_queue;
+	std::mutex m_fileout;
+	std::mutex m_stdout;
+	std::mutex m_stderr;
+
+	std::queue<std::string> queue;
+
+	std::thread print_thread;
+};
+
+void Log(LogLevel level, const char* message, ...)
+{
+	Logger* logger = Logger::GetInstance();
+
+	va_list args;
+	va_start(args, message);
+	vprintf(message, args);
+	va_end(args);
+
+	std::string msg;
+	size_t len = vsnprintf(0, 0, message, args);
+	msg.resize(len + 1); // For NUL.
+	vsnprintf(&msg[0], len + 1, message, args);
+	msg.resize(len); // Remove NUL.
+
+	logger->Log(level, msg);
 }

@@ -13,7 +13,7 @@ set(FUSEL_COLLECTIVE
     ${FUSEL_PUBLIC}
 )
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
     ${FUSEL_COLLECTIVE}
 )
 

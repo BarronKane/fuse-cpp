@@ -1,4 +1,4 @@
-#include "platform.h"
+#include "utilities/platform.h"
 
 test::test()
 {
