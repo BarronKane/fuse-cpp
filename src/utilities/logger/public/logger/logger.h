@@ -1,7 +1,8 @@
 #pragma once
 
+#include <string>
 #include <sstream>
-#include <stdarg.h>
+#include <cstdarg>
 #include <format>
 #include <mutex>
 #include <queue>
@@ -70,20 +71,25 @@ private:
 	std::thread print_thread;
 };
 
-void Log(LogLevel level, const char* message, ...)
+void Log(LogLevel level, const char* const message, ...)
 {
 	Logger* logger = Logger::GetInstance();
 
-	va_list args;
+	// This could be something else, but vector is safe.
+	std::vector<char> msg = std::vector<char>{};
+	size_t length = strlen(message);
+	std::va_list args;
+	
+	msg.resize(length + 1);
+
 	va_start(args, message);
-	vprintf(message, args);
+	const auto status = std::vsnprintf(msg.data(), msg.size(), message, args);
 	va_end(args);
 
-	std::string msg;
-	size_t len = vsnprintf(0, 0, message, args);
-	msg.resize(len + 1); // For NUL.
-	vsnprintf(&msg[0], len + 1, message, args);
-	msg.resize(len); // Remove NUL.
+	if (status < 0)
+	{
+		throw std::runtime_error{ "Log String Format Error." };
+	}			
 
-	logger->Log(level, msg);
+	logger->Log(level, std::string { msg.data() } );
 }

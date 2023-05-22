@@ -5,13 +5,18 @@
 #include <string>
 
 #include "logger/logger.h"
+#include "utilities/platform.h"
 
 using namespace std;
 
 int main() {
     // Logger test.
-    Log(LogLevel::info, "Test Log.");
+    uint16 i = 32;
+    Log(LogLevel::info, "Test Log. Number: %d", i);
     
-    system("pause");
+    do {
+        std::cout << '\n' << "Press the Enter key to continue.";
+    } while (cin.get() != '\n');
+
     return 0;
 }

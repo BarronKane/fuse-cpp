@@ -37,12 +37,11 @@ void Logger::Log(LogLevel level, std::string message)
 	std::tm* now = std::localtime(&t);
 
 	os	<< "[" << LevelToString(level) << "] "
-		<< (now->tm_year)
-		<< now->tm_mon
+		<< (now->tm_year + 1900) << "-"
+		<< now->tm_mon << "-"
 		<< now->tm_mday
-		<< "<"
-		<< message
-		<< ">";
+		<< " < "
+		<< message;
 
 	oo	<< "[" << LevelToString(level) << "] <"
 		<< message
