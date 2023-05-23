@@ -8,8 +8,7 @@ Logger* Logger::logger_;
 
 Logger::Logger()
 {
-	//Logger* logger = GetInstance();
-	//print_thread = std::thread(&Logger::print, std::ref(logger));
+	print_thread = std::thread(&Logger::print, this);
 }
 
 Logger::~Logger()
@@ -63,8 +62,9 @@ void Logger::push(std::string message, std::queue<std::string> queue, std::mutex
 	// Guard is released out of scope.
 }
 
-void Logger::print(Logger* logger)
+void Logger::print()
 {
+	Logger* logger = GetInstance();
 	while (true)
 	{
 		{

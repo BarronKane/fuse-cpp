@@ -62,7 +62,7 @@ private:
 
 	void push(std::string message, std::queue<std::string> queue, std::mutex &mut);
 
-	void print(Logger* logger);
+	void print();
 
 	std::mutex m_queue_cout;
 	std::mutex m_queue_file;
