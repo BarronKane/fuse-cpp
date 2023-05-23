@@ -13,6 +13,7 @@ int main() {
     // Logger test.
     uint16 i = 32;
     Log(LogLevel::info, "Test Log. Number: %d", i);
+    std::cout << "C++ Standard: " << __cplusplus;
     
     do {
         std::cout << '\n' << "Press the Enter key to continue.";

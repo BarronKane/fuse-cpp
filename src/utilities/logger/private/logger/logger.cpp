@@ -8,7 +8,8 @@ Logger* Logger::logger_;
 
 Logger::Logger()
 {
-	print_thread = std::thread(print, this);
+	//Logger* logger = GetInstance();
+	//print_thread = std::thread(&Logger::print, std::ref(logger));
 }
 
 Logger::~Logger()

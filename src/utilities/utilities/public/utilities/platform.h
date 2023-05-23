@@ -54,8 +54,8 @@ typedef GenericTypes::WIDECHAR		WIDECHAR;
 // TODO: Move these to the above struct.
 
 #if __cplusplus >= 202002L
-typdef char8_t						CHAR8;	
-typdef char8_t						UTF8CHAR;	
+typedef char8_t						CHAR8;	
+typedef char8_t						UTF8CHAR;	
 #else
 typedef GenericTypes::UTF8CHAR		CHAR8;
 typedef GenericTypes::UTF8CHAR		UTF8CHAR;

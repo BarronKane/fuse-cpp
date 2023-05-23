@@ -24,6 +24,10 @@ if(WIN32)
     add_compile_definitions(
         _WIN32_WINNT=0x0601
     )
+    add_definitions(
+        " /Zc:__cplusplus"
+        " /std:c++20"
+    )
 endif(WIN32)
 
 set(CMAKE_CXX_STANDARD 20)
