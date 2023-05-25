@@ -28,7 +28,7 @@ struct GenericTypes
 	typedef unsigned char	 	UTF8CHAR;		// 8-bit representation, char8_t c++20 and up.
 	typedef uint16				CHAR16;		// 16-bit representation. char16_t C++11 and up.
 	typedef uint32				CHAR32;		// 32-bit representation. char32_t c++11 and up.
-	typedef WIDECHAR			TCHAR;		// Switchable character. ANSICHAR or WIDECHAR depending on use case.
+//	typedef WIDECHAR			TCHAR;		// Switchable character. ANSICHAR or WIDECHAR depending on use case.
 
 	typedef int32					TYPE_OF_NULL;
 	typedef decltype(nullptr)		TYPE_OF_NULLPTR;
@@ -77,7 +77,7 @@ typedef GenericTypes::CHAR32		CHAR32;
 typedef GenericTypes::CHAR32		UTF32CHAR;
 #endif
 
-typedef GenericTypes::TCHAR			TCHAR;
+//typedef GenericTypes::TCHAR			TCHAR;
 
 typedef GenericTypes::TYPE_OF_NULL	TYPE_OF_NULL;
 typedef GenericTypes::TYPE_OF_NULLPTR	TYPE_OF_NULLPTR;

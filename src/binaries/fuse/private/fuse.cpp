@@ -10,16 +10,15 @@
 using namespace std;
 
 int main() {
-    std::cout << "C++ Standard: " << __cplusplus << std::endl;
+    
+    std::string exe_path = GetEXE();
+    Log(LogLevel::info, "EXE Location: %s", exe_path.c_str());
 
-    // Logger test.
-    Log(LogLevel::info, "Test Log. Number: %d", 1);
-    Log(LogLevel::info, "Test Log. Number: %d", 2);
-    Log(LogLevel::info, "Test Log. Number: %d", 3);
-    Log(LogLevel::info, "Test Log. Number: %d", 4);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(300));
     
     do {
-        std::cout << '\n' << "Press the Enter key to continue.";
+        std::cout << '\n' << "Press the Enter key to continue.\n";
     } while (cin.get() != '\n');
 
     Logger* logger = logger->GetInstance();

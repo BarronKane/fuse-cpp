@@ -90,10 +90,12 @@ void Log(LogLevel level, const char* const message, ...)
 	size_t length = strlen(message);
 	std::va_list args;
 	
-	msg.resize(length + 1);
+	// TODO: Need a way to dynamically catch the size of all argument values.
+	// For now we will simple have a length a bit long.
+	msg.resize(length + 200);
 
 	va_start(args, message);
-	const auto status = std::vsnprintf(msg.data(), msg.size(), message, args);
+	const int status = std::vsnprintf(msg.data(), msg.size(), message, args);
 	va_end(args);
 
 	if (status < 0)
