@@ -39,11 +39,6 @@ class Logger
 {
 public:
 
-	// Not cloneable.
-	Logger(Logger &other) = delete;
-	// Not assignable.
-	void operator=(const Logger &) = delete;
-
 	// Static method to control access.
 	static Logger* GetInstance();
 
@@ -51,17 +46,25 @@ public:
 
 	void Log(LogLevel level, std::string message);
 
+	void shutdown();
+
 protected:
 
 	Logger();
-	~Logger();
 
 	static Logger* logger_;
 
 private:
 
-	void push(std::string message, std::queue<std::string> queue, std::mutex &mut);
+	// Not cloneable.
+	Logger(Logger& other) = delete;
+	// Not assignable.
+	void operator=(const Logger&) = delete;
 
+
+	void push_cout(std::string message);
+
+	bool b_print = true;
 	void print();
 
 	std::mutex m_queue_cout;

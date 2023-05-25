@@ -8,16 +8,6 @@ Logger* Logger::logger_;
 
 Logger::Logger()
 {
-	print_thread = std::thread(&Logger::print, this);
-}
-
-Logger::~Logger()
-{
-	print_thread.join();
-	if (logger_ != nullptr)
-	{
-		delete logger_;
-	}
 }
 
 Logger* Logger::GetInstance()
@@ -25,6 +15,9 @@ Logger* Logger::GetInstance()
 	if (logger_ == nullptr)
 	{
 		logger_ = new Logger();
+		logger_->print_thread = std::thread(&Logger::print, logger_);
+
+		std::cout << "Logger Initialized." << std::endl;
 	}
 	return logger_;
 }
@@ -51,21 +44,21 @@ void Logger::Log(LogLevel level, std::string message)
 	// Test
 	//std::cout << os.str() << std::endl;
 
-	push(oo.str(), cout_queue, m_queue_cout);
-	push(os.str(), file_queue, m_queue_file);
+	push_cout(os.str());
+	//push_cout(os.str());
 }
 
-void Logger::push(std::string message, std::queue<std::string> queue, std::mutex &mut)
+void Logger::push_cout(std::string message)
 {
-	std::lock_guard<std::mutex> lock(mut);
-	queue.push(message);
+	std::lock_guard<std::mutex> lock(m_queue_cout);
+	cout_queue.push(message);
 	// Guard is released out of scope.
 }
 
 void Logger::print()
 {
 	Logger* logger = GetInstance();
-	while (true)
+	while (logger->b_print == true)
 	{
 		{
 			std::lock_guard<std::mutex> lock(logger->m_queue_cout);
@@ -77,4 +70,10 @@ void Logger::print()
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(16));
 	}
+}
+
+void Logger::shutdown()
+{
+	b_print = false;
+	print_thread.join();
 }
