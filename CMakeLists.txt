@@ -18,17 +18,27 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # TODO: Compiler flags
 
-if(WIN32)
+if(WIN32 OR MSVC)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
     add_compile_definitions(
+        # This sets the minimum feature set to Windows 7.
         _WIN32_WINNT=0x0601
     )
     add_definitions(
-        " /Zc:__cplusplus"
-        " /std:c++20"
+        " /Zc:__cplusplus "
+        " /std:c++20 "
     )
 endif(WIN32)
+
+if(UNIX AND NOT APPLE)
+    add_compile_definitions(
+
+    )
+    add_definitions(
+
+    )
+endif(UNIX AND NOT APPLE)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
