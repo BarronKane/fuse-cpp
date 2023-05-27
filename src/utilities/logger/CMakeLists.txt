@@ -4,10 +4,14 @@ set(FUSE_LOGGER ${PROJECT_NAME} CACHE INTERNAL "FUSE_LOGGER")
 set(FUSEL_PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/private/logger/logger.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/private/logger/sink.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/private/logger/source.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/private/logger/record.cpp
 )
 set(FUSEL_PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/public/logger/logger.h
     ${CMAKE_CURRENT_SOURCE_DIR}/public/logger/sink.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/public/logger/source.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/public/logger/record.h
 )
 
 set(FUSEL_COLLECTIVE

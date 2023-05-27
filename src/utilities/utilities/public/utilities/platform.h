@@ -13,18 +13,20 @@ class test
  */
 struct GenericTypes
 {
-	typedef unsigned char 		uint8;
-	typedef unsigned short int	uint16;
-	typedef unsigned int		uint32;
-	typedef unsigned long long	uint64;
+	typedef unsigned char 				uint8;
+	typedef unsigned short int			uint16;
+	typedef unsigned int				uint32;
+	typedef unsigned long long			uint64;
 
-	typedef	signed char			int8;
-	typedef signed short int	int16;
-	typedef signed int	 		int32;
-	typedef signed long long	int64;
+	typedef	signed char					int8;
+	typedef signed short int			int16;
+	typedef signed int	 				int32;
+	typedef signed long long			int64;
 
-	typedef char				ANSICHAR;	// 8-bit fixed-width representation of 7-bit characters.
-	typedef wchar_t				WIDECHAR;   // ?-bit fixed-width representation of a wide character set. Differs per-platform.
+	// 8-bit fixed-width representation of 7-bit characters.
+	typedef char						ANSICHAR;	
+	// ?-bit fixed-width representation of a wide character set. Differs per-platform.
+	typedef wchar_t						WIDECHAR;
 
 	// 8-bit representation, char8_t c++20 and up.
 #if __cplusplus >= 202002L
@@ -53,7 +55,8 @@ struct GenericTypes
 	typedef uint32						UTF32CHAR;
 #endif
 
-	typedef WIDECHAR					TCHAR;		// Switchable character. ANSICHAR or WIDECHAR depending on use case.
+	// Switchable character. ANSICHAR or WIDECHAR depending on use case.
+	typedef WIDECHAR					TCHAR;
 
 	typedef int32						TYPE_OF_NULL;
 	typedef decltype(nullptr)			TYPE_OF_NULLPTR;
