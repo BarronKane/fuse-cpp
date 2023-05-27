@@ -9,11 +9,13 @@
 
 using namespace std;
 
-int main() {
+int main() 
+{
     
     std::string exe_path = GetEXE();
-    Log(LogLevel::info, "EXE Location: {}", exe_path.c_str());
+    Log(LogLevel::info, "EXE Location: {}", exe_path);
 
+    int result = guarded_main();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(300));
     
@@ -23,6 +25,12 @@ int main() {
 
     Logger* logger = logger->GetInstance();
     logger->shutdown();
+
+    return result;
+}
+
+int guarded_main()
+{
 
     return 0;
 }

@@ -88,30 +88,3 @@ void Log(LogLevel level, std::string_view format, Args&&... args)
 
 	logger->Log(level, std::vformat(format, std::make_format_args(std::forward<Args>(args)...)));
 }
-
-/*
-void Log(LogLevel level, const char* const message, ...)
-{
-	Logger* logger = Logger::GetInstance();
-
-	// This could be something else, but vector is safe.
-	std::vector<char> msg = std::vector<char>{};
-	size_t length = strlen(message);
-	std::va_list args;
-	
-	// TODO: Need a way to dynamically catch the size of all argument values.
-	// For now we will simple have a length a bit long.
-	msg.resize(length + 200);
-
-	va_start(args, message);
-	const int status = std::vsnprintf(msg.data(), msg.size(), message, args);
-	va_end(args);
-
-	if (status < 0)
-	{
-		throw std::runtime_error{ "Log String Format Error." };
-	}			
-
-	logger->Log(level, std::string { msg.data() } );
-}
-*/
