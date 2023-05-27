@@ -81,6 +81,15 @@ private:
 	std::thread file_thread;
 };
 
+template<typename... Args>
+void Log(LogLevel level, std::string_view format, Args&&... args)
+{
+	Logger* logger = Logger::GetInstance();
+
+	logger->Log(level, std::vformat(format, std::make_format_args(std::forward<Args>(args)...)));
+}
+
+/*
 void Log(LogLevel level, const char* const message, ...)
 {
 	Logger* logger = Logger::GetInstance();
@@ -105,3 +114,4 @@ void Log(LogLevel level, const char* const message, ...)
 
 	logger->Log(level, std::string { msg.data() } );
 }
+*/
