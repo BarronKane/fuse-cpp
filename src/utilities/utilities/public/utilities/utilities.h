@@ -6,16 +6,19 @@
 
 #if defined WINDOWS || defined _WIN32 || defined _WIN64 || defined __CYGWIN_
 
-#include <Windows.h>
+	// Overwrite our platform.h define.
+	#define TCHAR __TCHAR__
 
-std::string GetEXE_()
-{
-	char path[MAX_PATH];
-	GetModuleFileName(NULL, path, MAX_PATH);
-	std::string exe_path(path);
+	#include <Windows.h>
 
-	return exe_path;
-}
+	std::string GetEXE_()
+	{
+		char path[MAX_PATH];
+		GetModuleFileName(NULL, path, MAX_PATH);
+		std::string exe_path(path);
+
+		return exe_path;
+	}
 #endif
 
 // TODO: Check freebsd.

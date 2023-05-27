@@ -29,7 +29,7 @@ if(WIN32 OR MSVC)
         " /Zc:__cplusplus "
         " /std:c++20 "
     )
-endif(WIN32)
+endif(WIN32 OR MSVC)
 
 if(UNIX AND NOT APPLE)
     add_compile_definitions(
