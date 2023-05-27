@@ -6,9 +6,6 @@
 
 #if defined WINDOWS || defined _WIN32 || defined _WIN64 || defined __CYGWIN_
 
-	// Overwrite our platform.h define.
-	#define TCHAR __TCHAR__
-
 	#include <Windows.h>
 
 	std::string GetEXE_()

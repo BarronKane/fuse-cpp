@@ -57,6 +57,7 @@ struct GenericTypes
 
 	// Switchable character. ANSICHAR or WIDECHAR depending on use case.
 	typedef WIDECHAR					TCHAR;
+	#define _TCHAR_DEFINED
 
 	typedef int32						TYPE_OF_NULL;
 	typedef decltype(nullptr)			TYPE_OF_NULLPTR;

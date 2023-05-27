@@ -9,6 +9,12 @@
 
 using namespace std;
 
+int guarded_main()
+{
+
+    return 0;
+}
+
 int main() 
 {
     
@@ -27,10 +33,4 @@ int main()
     logger->shutdown();
 
     return result;
-}
-
-int guarded_main()
-{
-
-    return 0;
 }
