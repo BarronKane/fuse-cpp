@@ -31,8 +31,8 @@ struct GenericTypes
 	typedef char8_t						CHAR8;
 	typedef char8_t						UTF8CHAR;
 #else
-	typedef GenericTypes::UTF8CHAR		CHAR8;
-	typedef GenericTypes::UTF8CHAR		UTF8CHAR;
+	typedef unsigned char				CHAR8;
+	typedef unsigned char				UTF8CHAR;
 #endif
 
 	// 16-bit representation. char16_t C++11 and up.
@@ -40,8 +40,8 @@ struct GenericTypes
 	typedef char16_t					CHAR16;
 	typedef char16_t					UTF16CHAR;
 #else
-	typedef GenericTypes::CHAR16		CHAR16;
-	typedef GenericTypes::CHAR16		UTF16CHAR;
+	typedef uint16						CHAR16;
+	typedef uint16						UTF16CHAR;
 #endif
 
 	// 32-bit representation. char32_t c++11 and up.
@@ -49,8 +49,8 @@ struct GenericTypes
 	typedef char32_t					CHAR32;
 	typedef char32_t					UTF32CHAR;
 #else
-	typedef GenericTypes::CHAR32		CHAR32;
-	typedef GenericTypes::CHAR32		UTF32CHAR;
+	typedef uint32						CHAR32;
+	typedef uint32						UTF32CHAR;
 #endif
 
 	typedef WIDECHAR					TCHAR;		// Switchable character. ANSICHAR or WIDECHAR depending on use case.
