@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "utilities/utilities.h"
 
 namespace logging
@@ -14,6 +16,6 @@ namespace logging
 
 	private:
 
-		std::string category;	
+		std::string _category;	
 	};
 }

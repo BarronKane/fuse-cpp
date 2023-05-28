@@ -4,6 +4,6 @@ namespace logging
 {
 	source::source(std::string Category)
 	{
-		category = Category;
+		_category = Category;
 	}
 }

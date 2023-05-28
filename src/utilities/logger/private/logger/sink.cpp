@@ -49,6 +49,9 @@ namespace logging
 			std::cout << "EXITING";
 			exit(1);
 		}
+
+		// Startup the thread.
+		thread_writer = std::thread(&sink::print_thread, this);
 	}
 
 	void sink::push(std::shared_ptr<record> in_record)
