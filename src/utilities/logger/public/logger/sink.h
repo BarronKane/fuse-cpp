@@ -24,7 +24,7 @@ namespace logging
 
 		void with_header(std::string header);
 
-		void push(record& record);
+		void push(std::shared_ptr<record> in_record);
 
 	protected:
 

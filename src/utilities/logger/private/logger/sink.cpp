@@ -51,10 +51,11 @@ namespace logging
 		}
 	}
 
-	void sink::push(record& record)
+	void sink::push(std::shared_ptr<record> in_record)
 	{
-		std::lock_guard<std::mutex> lock(m_file);
-
+		std::lock_guard<std::mutex> lock(m_queue);
+		std::shared_ptr<record> _record = in_record;
+		records.push(_record);
 	}
 
 	void sink::print_thread()
@@ -68,6 +69,7 @@ namespace logging
 					std::shared_ptr<record> _record = records.front();
 					records.pop();
 
+					std::lock_guard lock(m_file);
 					file.open(file_path);
 
 					if (!_record->prefix.empty())
