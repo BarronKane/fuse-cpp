@@ -8,7 +8,7 @@
 
 	#include <Windows.h>
 
-	std::string GetEXE_()
+	inline std::string GetEXE_()
 	{
 		char path[MAX_PATH];
 		GetModuleFileName(NULL, path, MAX_PATH);
@@ -24,7 +24,7 @@
 
 	#include <unistd.h>
 
-	std::string GetEXE_()
+	inline std::string GetEXE_()
 	{
 		char path[FILENAME_MAX];
 		size_t count = readlink("/proc/self/exe", path, FILENAME_MAX);
@@ -39,7 +39,7 @@
 	#include <mach-o/dyld.h>
 	#include <limits.h>
 
-	std::string GetEXE_()
+	inline std::string GetEXE_()
 	{
 		char buffer [PATH_MAX];
 		uint32 buffersize = PATH_MAX;
@@ -52,7 +52,7 @@
 	}
 #endif
 
-std::string GetEXE()
+inline std::string GetEXE()
 {
 	return GetEXE_();
 }
