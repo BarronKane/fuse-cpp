@@ -8,10 +8,12 @@ namespace logging
 	{
 	public:
 
+		source(std::string Category);
+
 	protected:
 
 	private:
 
-		
+		std::string category;	
 	};
 }
