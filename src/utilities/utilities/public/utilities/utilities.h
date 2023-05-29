@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <filesystem>
 
 #include "utilities/platform.h"
 
@@ -8,11 +9,11 @@
 
 	#include <Windows.h>
 
-	inline std::string GetEXE_()
+	inline std::filesystem::path GetEXE_()
 	{
 		char path[MAX_PATH];
 		GetModuleFileName(NULL, path, MAX_PATH);
-		std::string exe_path(path);
+		std::filesystem::path exe_path(path);
 
 		return exe_path;
 	}
@@ -24,11 +25,11 @@
 
 	#include <unistd.h>
 
-	inline std::string GetEXE_()
+	inline std::filesystem::path GetEXE_()
 	{
 		char path[FILENAME_MAX];
 		size_t count = readlink("/proc/self/exe", path, FILENAME_MAX);
-		std::string exe_path(path);
+		std::filesystem::path exe_path(path);
 
 		return exe_path;
 	}
@@ -39,7 +40,7 @@
 	#include <mach-o/dyld.h>
 	#include <limits.h>
 
-	inline std::string GetEXE_()
+	inline std::filesystem::path GetEXE_()
 	{
 		char buffer [PATH_MAX];
 		uint32 buffersize = PATH_MAX;
@@ -48,11 +49,13 @@
 			puts(buffer);
 		}
 
-		std::string exe_path(buffer);
+		std::filesystem::path exe_path(buffer);
+
+		return exe_path;
 	}
 #endif
 
-inline std::string GetEXE()
+inline std::filesystem::path GetEXE()
 {
 	return GetEXE_();
 }

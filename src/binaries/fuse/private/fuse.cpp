@@ -18,7 +18,7 @@ int guarded_main()
 int main() 
 {
     
-    std::string exe_path = GetEXE();
+    std::string exe_path = GetEXE().string();
     Log(LogLevel::info, "EXE Location: {}", exe_path);
 
     int result = guarded_main();
