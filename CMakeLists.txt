@@ -62,6 +62,9 @@ find_package(CURL REQUIRED)
 add_subdirectory_with_folder("utilities" src/utilities/utilities)
 add_subdirectory_with_folder("utilities" src/utilities/logger)
 
+add_subdirectory_with_folder("ffmpeg" src/ffmpeg)
+add_subdirectory_with_folder("ui" src/gui)
+
 add_subdirectory_with_folder("Fuse" src/binaries/fuse)
 
 

@@ -45,6 +45,7 @@
 .idea/
 .idea/*.xml
 
+bin/
 build/**/*
 
 include/*
