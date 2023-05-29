@@ -9,6 +9,8 @@ class Fuse(ConanFile):
 
     def requirements(self):
         self.requires("libcurl/8.0.1")
+        self.requires("qt/6.5.0")
+        self.requires("openssl/1.1.1t")
 
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
