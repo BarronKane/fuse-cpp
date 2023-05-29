@@ -8,6 +8,8 @@ Logger* Logger::logger_;
 
 Logger::Logger()
 {
+	// Default source.
+	Set_Source("");
 }
 
 Logger* Logger::GetInstance()
@@ -22,7 +24,7 @@ Logger* Logger::GetInstance()
 	return logger_;
 }
 
-void Logger::Log(LogLevel level, std::string message)
+void Logger::Compose(LogLevel level, std::string message)
 {
 	std::ostringstream os;
 	std::ostringstream oo;
@@ -41,18 +43,35 @@ void Logger::Log(LogLevel level, std::string message)
 		<< message
 		<< ">";
 
-	// Test
-	//std::cout << os.str() << std::endl;
-
 	push_cout(os.str());
-	//push_cout(os.str());
+
+	
+}
+
+void Logger::Make_Source(std::string category)
+{	
+	sources.insert(std::make_pair(category, std::unique_ptr<logging::source>(new logging::source(category))));
+}
+
+void Logger::Set_Source(std::string category)
+{
+	if (!sources.contains(category))
+	{
+		Make_Source(category);
+	}
+
+	current_source = category;
+}
+
+bool Logger::Check_Source_Meta()
+{
+	return sources[current_source]->b_meta;
 }
 
 void Logger::push_cout(std::string message)
 {
 	std::lock_guard<std::mutex> lock(m_queue_cout);
 	cout_queue.push(message);
-	// Guard is released out of scope.
 }
 
 void Logger::print()

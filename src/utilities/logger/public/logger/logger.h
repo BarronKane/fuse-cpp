@@ -4,12 +4,16 @@
 #include <sstream>
 #include <cstdarg>
 #include <format>
+#include <map>
+#include <memory>
 #include <mutex>
 #include <queue>
 #include <chrono>
 #include <thread>
+#include <source_location>
 
 #include "utilities/utilities.h"
+#include "logger/source.h"
 
 class Logger;
 
@@ -44,7 +48,10 @@ public:
 
 	// Public Interface
 
-	void Log(LogLevel level, std::string message);
+	void Compose(LogLevel level, std::string message);
+
+	void Set_Source(std::string category);
+	bool Check_Source_Meta();
 
 	void shutdown();
 
@@ -61,6 +68,7 @@ private:
 	// Not assignable.
 	void operator=(const Logger&) = delete;
 
+	void Make_Source(std::string category);
 
 	void push_cout(std::string message);
 
@@ -68,23 +76,44 @@ private:
 	void print();
 
 	std::mutex m_queue_cout;
-	std::mutex m_queue_file;
 
-	std::mutex m_fileout;
 	std::mutex m_stdout;
 	std::mutex m_stderr;
 
+	std::map<std::string, std::unique_ptr<logging::source>> sources;
+	std::string current_source;
+
 	std::queue<std::string> cout_queue;
-	std::queue<std::string> file_queue;
 
 	std::thread print_thread;
-	std::thread file_thread;
 };
 
 template<typename... Args>
-void Log(LogLevel level, std::string_view format, Args&&... args)
+void _log(LogLevel level, const std::source_location& loc, std::string_view format, Args&&... args)
 {
 	Logger* logger = Logger::GetInstance();
+	std::string msg = std::vformat(format, std::make_format_args(std::forward<Args>(args)...));
 
-	logger->Log(level, std::vformat(format, std::make_format_args(std::forward<Args>(args)...)));
+	std::string final_msg;
+	if (logger->Check_Source_Meta())
+	{
+		std::ostringstream meta;
+		meta <<  loc.file_name() << ":";
+		meta << loc.line() << ":";
+		meta << loc.function_name() << " - ";
+		final_msg = meta.str() + msg;
+	}
+	else
+	{
+		final_msg = msg;
+	}
+
+	logger->Compose(level, final_msg);
 }
+
+// MSVC is the only compiler not to support an optional comma in C++20.
+#if _MSC_VER
+#define Log(level, msg, ...) _log(level, std::source_location::current(), msg, __VA_ARGS__)
+#else
+#define Log(level, msg, ...) _log(level, std::source_location::current(), msg __VA_OPT__(,) __VA_ARGS__)
+#endif
