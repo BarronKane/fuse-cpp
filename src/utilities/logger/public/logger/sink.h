@@ -19,8 +19,8 @@ namespace logging
 	{
 	public:
 
-		sink(std::string file);
 		sink(std::filesystem::path file);
+		~sink();
 
 		void with_header(std::string header);
 
@@ -29,8 +29,6 @@ namespace logging
 	protected:
 
 	private:
-
-		~sink();
 
 		void file_check();
 

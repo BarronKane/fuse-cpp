@@ -3,6 +3,8 @@
 #include <string>
 
 #include "logger/logger.h"
+#include "logger/sink.h"
+#include "utilities/utilities.h"
 
 Logger* Logger::logger_;
 
@@ -10,6 +12,13 @@ Logger::Logger()
 {
 	// Default source.
 	Set_Source("");
+	// Default sink.
+	std::filesystem::path cwd = GetEXE();
+	cwd.replace_filename("log");
+	cwd.replace_extension("txt");
+
+	std::shared_ptr<logging::sink> sink(new logging::sink(cwd));
+	sources[current_source]->Attach_Sink(std::move(sink));
 }
 
 Logger* Logger::GetInstance()
@@ -43,9 +52,10 @@ void Logger::Compose(LogLevel level, std::string message)
 		<< message
 		<< ">";
 
-	push_cout(os.str());
-
-	
+	push_cout(oo.str());
+		
+	std::shared_ptr<logging::record> record(new logging::record(os.str()));
+	sources[current_source]->Push_Sinks(std::move(record));
 }
 
 void Logger::Make_Source(std::string category)

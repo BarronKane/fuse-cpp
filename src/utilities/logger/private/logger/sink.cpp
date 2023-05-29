@@ -2,14 +2,6 @@
 
 namespace logging
 {
-	sink::sink(std::string file)
-	{
-		const std::filesystem::path in_file = file;
-
-		file_path = in_file;
-		file_check();
-	}
-
 	sink::sink(std::filesystem::path file)
 	{
 		file_path = file;

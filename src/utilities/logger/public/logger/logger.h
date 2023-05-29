@@ -14,6 +14,7 @@
 
 #include "utilities/utilities.h"
 #include "logger/source.h"
+#include "logger/record.h"
 
 class Logger;
 
