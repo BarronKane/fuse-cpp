@@ -54,6 +54,7 @@ bin/*
 test/test_runner
 
 .vscode
+conan_imports_manifest.txt
 
 # Ignore python virtualenv
 env/
