@@ -1,3 +1,3 @@
-# Lessons
+# Fuse-CPP
 
-A personal learning course.
+This will be a video file re-encoder in time. 
