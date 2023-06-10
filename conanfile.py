@@ -6,7 +6,7 @@ class Fuse(ConanFile):
     name = "Fuse"
     version = "0.1.0"
     settings = "os", "compiler", "build_type", "arch"
-    generators = "qt", "cmake"
+    generators = "qt", "CMakeDeps", "CMakeToolchain", "cmake_paths", "cmake_find_package"
     default_options = { 
         "libcurl/*:shared": True,
 

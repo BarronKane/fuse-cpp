@@ -61,7 +61,7 @@ define_property(
 
 find_package(CURL REQUIRED)
 #set(DESIRED_QT_VERSION 6)
-find_package(Qt6 COMPONENTS Core REQUIRED CONFIG)
+find_package(Qt6 COMPONENTS Core REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
