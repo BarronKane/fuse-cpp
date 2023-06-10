@@ -7,8 +7,6 @@
 #include "logger/logger.h"
 #include "utilities/platform.h"
 
-using namespace std;
-
 int guarded_main()
 {
 
@@ -27,7 +25,7 @@ int main()
     
     do {
         std::cout << '\n' << "Press the Enter key to continue.\n";
-    } while (cin.get() != '\n');
+    } while (std::cin.get() != '\n');
 
     Logger* logger = logger->GetInstance();
     logger->shutdown();
