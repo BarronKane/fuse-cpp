@@ -16,6 +16,7 @@ set(FUSEG_COLLECTIVE
 add_library(${FUSE_GUI} SHARED
     ${FUSEG_COLLECTIVE}
 )
+add_library(fuse::gui ALIAS ${FUSE_GUI})
 
 add_source_group(${FUSEG_COLLECTIVE})
 
@@ -43,5 +44,6 @@ install(EXPORT ${PROJECT_NAME}LibraryConfig DESTINATION share/${PROJECT_NAME}Lib
 export(TARGETS ${FUSE_GUI} FILE ${PROJECT_NAME}LibraryConfig.cmake)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-        
+    fuse::utilities
+    fuse::logger
 )

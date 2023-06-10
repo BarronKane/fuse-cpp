@@ -17,6 +17,7 @@ set(FUSEU_COLLECTIVE
 add_library(${FUSE_UTILITIES} SHARED
     ${FUSEU_COLLECTIVE}
 )
+add_library(fuse::utilities ALIAS ${FUSE_UTILITIES})
 
 add_source_group(${FUSEU_COLLECTIVE})
 

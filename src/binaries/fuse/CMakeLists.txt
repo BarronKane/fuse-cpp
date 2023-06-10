@@ -20,7 +20,8 @@ add_executable(${PROJECT_NAME}
 add_source_group(${FUSE_COLLECTIVE})
 
 target_link_libraries(${PROJECT_NAME}
-    ${FUSE_UTILITIES}
-    ${FUSE_LOGGER}
-    
+    fuse::utilities
+    fuse::logger
+    fuse::ffmpeg
+    fuse::gui    
 )

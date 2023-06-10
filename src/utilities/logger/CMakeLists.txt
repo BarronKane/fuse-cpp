@@ -22,6 +22,7 @@ set(FUSEL_COLLECTIVE
 add_library(${PROJECT_NAME} SHARED
     ${FUSEL_COLLECTIVE}
 )
+add_library(fuse::logger ALIAS ${PROJECT_NAME})
 
 add_source_group(${FUSEL_COLLECTIVE})
 
@@ -49,5 +50,5 @@ install(EXPORT ${PROJECT_NAME}LibraryConfig DESTINATION share/${PROJECT_NAME}Lib
 export(TARGETS ${FUSE_LOGGER} FILE ${PROJECT_NAME}LibraryConfig.cmake)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-    ${FUSE_UTILITIES}
+    fuse::utilities
 )
