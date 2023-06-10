@@ -9,6 +9,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(GenerateExportHeader)
 include(${CMAKE_SOURCE_DIR}/cmake/helpers.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -58,6 +60,11 @@ define_property(
 )
 
 find_package(CURL REQUIRED)
+#set(DESIRED_QT_VERSION 6)
+find_package(Qt6 COMPONENTS Core REQUIRED CONFIG)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 add_subdirectory_with_folder("utilities" src/utilities/utilities)
 add_subdirectory_with_folder("utilities" src/utilities/logger)

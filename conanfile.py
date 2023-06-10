@@ -1,11 +1,19 @@
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMakeDeps, CMake, cmake_layout
+from conans import tools, RunEnvironment, CMake
 
 class Fuse(ConanFile):
     name = "Fuse"
     version = "0.1.0"
     settings = "os", "compiler", "build_type", "arch"
-    default_options = { "libcurl/*:shared": True }
+    generators = "qt", "cmake"
+    default_options = { 
+        "libcurl/*:shared": True,
+
+        "qt/*:shared": True,
+        "qt/*:with_vulkan": True,
+        "qt/*:widgets": True
+        }
 
     def requirements(self):
         self.requires("libcurl/8.0.1")
@@ -18,10 +26,6 @@ class Fuse(ConanFile):
 
     def layout(self):
         cmake_layout(self)
-
-    def generate(self):
-        tc = CMakeToolchain(self)
-        tc.generate()
 
     def build(self):
         cmake = CMake(self)

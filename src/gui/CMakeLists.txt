@@ -46,4 +46,6 @@ export(TARGETS ${FUSE_GUI} FILE ${PROJECT_NAME}LibraryConfig.cmake)
 target_link_libraries(${PROJECT_NAME} PUBLIC
     fuse::utilities
     fuse::logger
+
+    Qt6::Core
 )

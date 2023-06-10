@@ -12,9 +12,9 @@ pushd build/
 conan install .. --output-folder . --build missing -s build_type=Debug
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	cmake .. -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=./generators/conan_toolchain.cmake
+	cmake .. -G "Xcode"
 else
-	cmake .. -DCMAKE_TOOLCHAIN_FILE=./generators/conan_toolchain.cmake
+	cmake ..
 fi
 
 cmake --build .
