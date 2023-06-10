@@ -60,11 +60,6 @@ define_property(
 )
 
 find_package(CURL REQUIRED)
-#set(DESIRED_QT_VERSION 6)
-find_package(Qt6 COMPONENTS Core REQUIRED)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 
 add_subdirectory_with_folder("utilities" src/utilities/utilities)
 add_subdirectory_with_folder("utilities" src/utilities/logger)

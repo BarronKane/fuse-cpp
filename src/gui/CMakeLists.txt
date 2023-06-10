@@ -8,13 +8,27 @@ set(FUSEG_PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/public/gui/gui.h
 )
 
+set(FUSEG_UI
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/qttest.ui
+)
+
+set(FUSEG_RCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources/qt_data.qrc
+)
+
 set(FUSEG_COLLECTIVE
     ${FUSEG_PRIVATE}
     ${FUSEG_PUBLIC}
 )
 
+find_package(Qt6 COMPONENTS Core Gui Widgets Xml Network Concurrent CONFIG REQUIRED)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 add_library(${FUSE_GUI} SHARED
     ${FUSEG_COLLECTIVE}
+    ${FUSEG_UI}
 )
 add_library(fuse::gui ALIAS ${FUSE_GUI})
 
@@ -48,4 +62,5 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     fuse::logger
 
     Qt6::Core
+    Qt6::Widgets
 )
